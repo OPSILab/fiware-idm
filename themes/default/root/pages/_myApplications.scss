@@ -137,6 +137,64 @@
   }
 }
 
+#spid_credentials, #spid_attributes {
+    .spid {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .spid_input {
+        width: 48%;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .spid_input_company {
+        flex: 0 0 100%;
+        margin-bottom: 8px;
+    }
+
+    .control-label {
+        &.group {
+            border-bottom: 1px solid #B6B6B6;
+            margin-bottom: 8px;
+        }
+    }
+
+    .attribute {
+        color: #5B5B5F;
+        margin-bottom: 4px;
+        font-weight: normal;
+
+        input {
+            margin-right: 7px;
+        }
+    }
+
+    .dropdown-menu {
+        position: relative;
+    }
+}
+
+#spid_attributes {
+    .attribute {
+        label {
+            min-height: 18px;
+            vertical-align: text-top;
+            margin-bottom: 0;
+            font-weight: normal;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input {
+            vertical-align: middle;
+            margin-top: -2px;
+        }
+    }
+}
+
 #create_permission_form,
 #create_usage_policy_form {
   .panel-group{

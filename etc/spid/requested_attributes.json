@@ -1,0 +1,98 @@
+{
+  "Name": {
+    "@FriendlyName": "Name",
+    "@Name": "name",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "FamilyName": {
+    "@FriendlyName": "FamilyName",
+    "@Name": "familyName",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "Email": {
+    "@FriendlyName": "Email",
+    "@Name": "email",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "FiscalNumber": {
+    "@FriendlyName": "FiscalNumber",
+    "@Name": "fiscalNumber",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "SpidCode": {
+    "@FriendlyName": "SpidCode",
+    "@Name": "spidCode",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "Gender": {
+    "@FriendlyName": "Gender",
+    "@Name": "gender",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "DateOfBirth": {
+    "@FriendlyName": "DateOfBirth",
+    "@Name": "dateOfBirth",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "CountyOfBirth": {
+    "@FriendlyName": "CountyOfBirth",
+    "@Name": "countyOfBirth",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "IdCard": {
+    "@FriendlyName": "IdCard",
+    "@Name": "idCard",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "RegisteredOffice": {
+    "@FriendlyName": "RegisteredOffice",
+    "@Name": "registeredOffice",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "DigitalAddress": {
+    "@FriendlyName": "DigitalAddress",
+    "@Name": "digitalAddress",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "PlaceOfBirth": {
+    "@FriendlyName": "PlaceOfBirth",
+    "@Name": "placeOfBirth",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "CompanyName": {
+    "@FriendlyName": "CompanyName",
+    "@Name": "companyName",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "MobilePhone": {
+    "@FriendlyName": "MobilePhone",
+    "@Name": "mobilePhone",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "Address": {
+    "@FriendlyName": "Address",
+    "@Name": "address",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  },
+  "ExpirationDate": {
+    "@FriendlyName": "ExpirationDate",
+    "@Name": "expirationDate",
+    "@NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+    "@isRequired": "true"
+  }
+}

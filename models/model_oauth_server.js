@@ -33,7 +33,7 @@ function getAccessToken(bearerToken) {
       include: [
         {
           model: user,
-          attributes: ['id', 'username', 'email', 'description', 'website', 'gravatar', 'image', 'extra', 'eidas_id']
+          attributes: ['id', 'username', 'email', 'description', 'website', 'gravatar', 'image', 'extra', 'eidas_id','spid_id']
         },
         {
           model: iot,
@@ -111,7 +111,7 @@ function getIdentity(id, password, oauth_client_id) {
 
   const search_user = user.findOne({
     where: { email: id },
-    attributes: ['id', 'username', 'gravatar', 'image', 'email', 'salt', 'password', 'scope', 'eidas_id', 'extra']
+      attributes: ['id', 'username', 'gravatar', 'image', 'email', 'salt', 'password', 'scope', 'eidas_id', 'spid_id', 'extra']
   });
   debug(oauth_client_id);
   const search_iot = iot.findOne({
@@ -488,7 +488,7 @@ function getRefreshToken(refreshToken) {
       include: [
         {
           model: user,
-          attributes: ['id', 'username', 'email', 'gravatar', 'extra', 'eidas_id']
+          attributes: ['id', 'username', 'email', 'gravatar', 'extra', 'eidas_id','spid_id']
         },
         {
           model: iot,

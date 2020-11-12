@@ -3,7 +3,7 @@ const config = {};
 config.port = 3000;
 config.host = 'http://localhost:3000';
 
-config.debug = false;
+config.debug = true;
 
 // HTTPS enable
 config.https = {
@@ -93,11 +93,11 @@ config.usage_control = {
 // Database info
 config.database = {
   host: 'localhost',
-  password: 'idm',
+  password: 'root',
   username: 'root',
   database: 'idm',
   dialect: 'mysql',
-  port: undefined,
+  port: 3306,
 };
 
 // External user authentication
@@ -147,12 +147,20 @@ config.site = {
   theme: 'default',
 };
 
-// Config eIDAS Authentication
+// Config eIDAS Authentication (take precedence over Spid)
 config.eidas = {
   enabled: false,
-  gateway_host: 'localhost',
-  node_host: 'https://se-eidas.redsara.es/EidasNode/ServiceProvider',
+  gateway_host: 'localhost:3000',
+  node_host: 'http://localhost:8088',
   metadata_expiration: 60 * 60 * 24 * 365, // One year
+};
+
+// Config Spid Configuration
+config.spid = {
+    enabled: true,
+    gateway_host: 'localhost',
+    node_host: 'http://localhost:8088',
+    metadata_expiration: 60 * 60 * 24 * 365, // One year
 };
 
 // Enables the possibility of adding identity attributes in users' profile

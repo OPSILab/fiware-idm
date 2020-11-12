@@ -723,6 +723,7 @@
       "label07": "Provider",
       "label08": "eIDAS Authentication",
       "label09": "Open ID Connect Authentication",
+      "label10": "SPID Authentication",
       "required_field": "This is a required field.",
       "alert01": "Url is already used",
       "popover01_body": "For security purposes, only OAuth requests coming from this URL will be accepted by KeyRock.",
@@ -763,6 +764,7 @@
       "panel_title06": "Authorized organizations",
       "panel_title07": "eIDAS Authentication",
       "panel_title08": "Open ID Connect Credentials",
+      "panel_title10": "SPID Authentication",
       "panel_subtitle01": "Client ID",
       "panel_subtitle02": "Client Secret",
       "panel_subtitle03": "Token types",
@@ -984,8 +986,33 @@
       "update_btn": "Update"
     },
     "step_create_eidas_credentials": {
-      "title": "eIDAS Authentication Details", 
+      "title": "eIDAS Authentication Details",
       "next_btn": "Next"
+    },
+    "step_create_spid_credentials": {
+      "title": "SPID Authentication Details",
+      "next_btn": "Next"
+    },
+    "edit_spid": {
+      "title01": "SPID Authentication Details",
+      "title02": "SPID Requested Attributes",
+      "name_label": "First Name",
+      "familyname_label": "Family Name",
+      "email_label": "Email",
+      "fiscalnumber_label": "Fiscal Number",
+      "spidcode_label": "Spid Code",
+      "gender_label": "Gender",
+      "dateofbirth_label": "Date Of Birth",
+      "countyofbirth_label": "County Of Birth",
+      "idcard_label": "Id Card",
+      "registeredoffice_label": "Registered Office",
+      "digitaladdress_label": "Digital Address",
+      "placeofbirth_label": "Place Of Birth",
+      "companyname_label": "Company Name",
+      "mobilephone_label": "Mobile Phone",
+      "address_label": "Address",
+      "expirationdate_label": "Expiration Date",
+      "update_btn": "Update"
     }
   },
   "errors": {

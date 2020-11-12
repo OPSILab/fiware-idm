@@ -103,7 +103,7 @@ exports.owned_permissions = function(req, res, next) {
 // - 6 Get and assign only public owned roles
 function check_user_action(application, path, method, permissions) {
   switch (true) {
-    case path.includes('step/avatar') || path.includes('step/eidas'):
+    case path.includes('step/avatar') || path.includes('step/eidas') || path.includes('step/spid'):
       if (permissions.includes('2')) {
         return true;
       }
@@ -112,7 +112,8 @@ function check_user_action(application, path, method, permissions) {
       path.includes('edit/roles') ||
       path.includes('edit/permissions') ||
       path.includes('edit/usage_policies') ||
-      path.includes('edit/eidas'):
+      path.includes('edit/eidas') ||
+      path.includes('edit/spid'):
       if (permissions.includes('3')) {
         return true;
       }

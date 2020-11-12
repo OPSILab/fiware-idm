@@ -11,7 +11,7 @@ const oauth_controller = require('../../controllers/oauth2/oauth2');
 router.post(
   '/login',
   oauth_controller.load_application,
-  saml2_controller.search_eidas_credentials,
+  saml2_controller.search_saml_credentials,
   saml2_controller.login
 );
 

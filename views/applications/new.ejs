@@ -128,6 +128,22 @@
                             </label>
                         </div>
                     <% } -%>
+                       <% if (spid_enabled) { -%>
+                          <div class="form-group required">
+                            <label class="control-label required" for="id_provider">
+                              <a href="#" class="contextual-help" data-toggle="popover" data-placement="left" data-title=""
+                                <%=translation.applications.new.popover05_title%>" data-content="<%=translation.applications.new.popover05_body%>" data-original-title="" title="">
+                                <i class="fa fa-question-circle"></i>
+                              </a>
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox" name="spid" value="spid">
+                                    <%=translation.applications.new.label10%>
+                                  </label>
+                              </div>
+                            </label>
+                          </div>
+                      <% } -%>
                 </fieldset>
             </div>
         <div class="modal-footer">

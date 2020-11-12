@@ -64,6 +64,9 @@ const scope = sequelize.import(path.join(__dirname, 'oauth2/oauth_scope'));
 // Import Eidas Credentials
 const eidas_credentials = sequelize.import(path.join(__dirname, 'eidas_credentials'));
 
+// Import Spid Credentials
+const spid_credentials = sequelize.import(path.join(__dirname, 'spid_credentials'));
+
 // Import Trusted Applications table
 const trusted_application = sequelize.import(path.join(__dirname, 'trusted_application'));
 
@@ -252,6 +255,12 @@ eidas_credentials.belongsTo(oauth_client, {
   onDelete: 'cascade'
 });
 
+// Relation between spid credentials and oauth client
+spid_credentials.belongsTo(oauth_client, {
+    foreignKey: { allowNull: false, unique: true },
+    onDelete: 'cascade'
+});
+
 // Relation between eidas credentials and oauth client
 usage_policy.belongsTo(oauth_client, {
   foreignKey: { allowNull: false, unique: true },
@@ -300,6 +309,7 @@ exports.scope = scope;
 exports.auth_token = auth_token;
 exports.user_authorized_application = user_authorized_application;
 exports.eidas_credentials = eidas_credentials;
+exports.spid_credentials = spid_credentials;
 exports.trusted_application = trusted_application;
 exports.usage_policy = usage_policy;
 exports.role_usage_policy = role_usage_policy;

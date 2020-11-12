@@ -338,6 +338,44 @@
             </div>
         <% } -%>
 
+           <% if (user_logged_permissions.includes('2') && spid_enabled && spid_credentials) { -%>
+            <div class="panel panel-default info">
+                <div class="panel-heading">
+                    <span class="title"><i class="far fa-id-card"></i><%=translation.applications.show.panel_title10%></span>
+                    <div class="table_actions clearfix">               
+                        <div class="btn-group">
+                            <a href="/idm/applications/<%= application.id %>/edit/spid" class="small">
+                                <button title="Edit" class="btn btn-default btn-sm">
+                                    <i class="fa fa-edit"></i> 
+                                    <span class="action">
+                                        <%=translation.applications.show.edit_btn%>
+                                    </span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="spid_org_name">
+                        <h5><%=translation.applications.show.label07%></h5>
+                        <p><%= spid_credentials.organization_name %></p>
+                    </div>
+                    <div class="spid_org_nif">
+                        <h5><%=translation.applications.show.label08%></h5>
+                        <p><%= spid_credentials.organization_nif %></p>
+                    </div>
+                    <div class="spid_sp_type">
+                        <h5><%=translation.applications.show.label09%></h5>
+                        <p><%= spid_credentials.sp_type %></p>
+                    </div>
+                    <div class="spid_metadata_url">
+                        <h5><%=translation.applications.show.label10%></h5>
+                        <p><a target="_blank" href="/idm/applications/<%= application.id %>/saml2/metadata">https://<%= gateway_host%>/idm/applications/<%= application.id %>/saml2/metadata</a></p>
+                    </div>
+                </div>
+            </div>
+        <% } -%>
+          
     </div>
 </div>
 

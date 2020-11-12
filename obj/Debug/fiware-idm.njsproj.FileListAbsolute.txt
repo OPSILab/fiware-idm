@@ -1,0 +1,3 @@
+C:\Users\erman\Desktop\GIT REPO\fiware-idm\obj\Debug\fiware-idm.njsproj.CoreCompileInputs.cache
+C:\Users\erman\Desktop\GIT REPO\fiware-idm\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Users\erman\Desktop\GIT REPO\fiware-idm\obj\Debug\fiware-idm.njsprojAssemblyReference.cache

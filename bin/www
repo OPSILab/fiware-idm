@@ -98,7 +98,9 @@ database.connect(config, err =>{
         }
     }
   }
-
+  if (err){
+  console.log(err);
+  }
   const app = require('../app');
   server = http.createServer(app); 
 

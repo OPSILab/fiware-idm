@@ -1,0 +1,481 @@
+<div id="content_body">
+  <div class="panel panel-default ">
+    <div class="panel-body">
+      <div class="edit">
+        <div class="modal-header">
+          <h3>
+            <%=translation.saml2.edit_spid.title01%>
+          </h3>
+        </div>
+        <form id="spid_credentials" ng-controller="DummyCtrl" name="" autocomplete="" class="ng-scope ng-pristine ng-valid" action="/idm/applications/<%= application.id %>/edit/spid/info?_method=put" method="POST" enctype="">
+          <input type='hidden' name='_csrf' value='<%= csrf_token%>' />
+          <div class="modal-body clearfix">
+            <fieldset>
+              <div class="form-group required spid">
+                <label class="control-label required">
+                  <%=translation.saml2.label01%>
+                </label>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_support_contact_person_name">
+                    <%=translation.saml2.label02%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_support_contact_person_name" name="spid_credentials[support_contact_person_name]" type="text" value="<%= spid_credentials.support_contact_person_name %>">
+                  </div>
+                  <% if (errors.indexOf("support_contact_person_name") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_support_contact_person_surname">
+                    <%=translation.saml2.label03%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_support_contact_person_surname" name="spid_credentials[support_contact_person_surname]" type="text" value="<%= spid_credentials.support_contact_person_surname %>">
+                  </div>
+                  <% if (errors.indexOf("support_contact_person_surname") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_support_contact_person_email">
+                    <%=translation.saml2.label04%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_support_contact_person_email" name="spid_credentials[support_contact_person_email]" type="text" value="<%= spid_credentials.support_contact_person_email %>">
+                  </div>
+                  <% if (errors.indexOf("support_contact_person_email") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_support_contact_person_number">
+                    <%=translation.saml2.label05%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_support_contact_person_number" name="spid_credentials[support_contact_person_telephone_number]" type="text" value="<%= spid_credentials.support_contact_person_telephone_number %>">
+                  </div>
+                  <% if (errors.indexOf("support_contact_person_telephone_number") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input_company">
+                  <label class="control-label required" for="id_support_contact_person_company">
+                    <%=translation.saml2.label06%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_support_contact_person_company" name="spid_credentials[support_contact_person_company]" type="text" value="<%= spid_credentials.support_contact_person_company %>">
+                  </div>
+                  <% if (errors.indexOf("support_contact_person_company") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+              </div>
+              <div class="form-group required spid">
+                <label class="control-label required">
+                  <%=translation.saml2.label07%>
+                </label>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_technical_contact_person_name">
+                    <%=translation.saml2.label08%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_technical_contact_person_name" name="spid_credentials[technical_contact_person_name]" type="text" value="<%= spid_credentials.technical_contact_person_name %>">
+                  </div>
+                  <% if (errors.indexOf("technical_contact_person_name") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_technical_contact_person_surname">
+                    <%=translation.saml2.label09%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_technical_contact_person_surname" name="spid_credentials[technical_contact_person_surname]" type="text" value="<%= spid_credentials.technical_contact_person_surname %>">
+                  </div>
+                  <% if (errors.indexOf("technical_contact_person_surname") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_technical_contact_person_email">
+                    <%=translation.saml2.label10%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_technical_contact_person_email" name="spid_credentials[technical_contact_person_email]" type="text" value="<%= spid_credentials.technical_contact_person_email %>">
+                  </div>
+                  <% if (errors.indexOf("technical_contact_person_email") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_technical_contact_person_number">
+                    <%=translation.saml2.label11%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_technical_contact_person_number" name="spid_credentials[technical_contact_person_telephone_number]" type="text" value="<%= spid_credentials.technical_contact_person_telephone_number %>">
+                  </div>
+                  <% if (errors.indexOf("technical_contact_person_telephone_number") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input_company">
+                  <label class="control-label required" for="id_technical_contact_person_company">
+                    <%=translation.saml2.label12%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_technical_contact_person_company" name="spid_credentials[technical_contact_person_company]" type="text" value="<%= spid_credentials.technical_contact_person_company %>">
+                  </div>
+                  <% if (errors.indexOf("technical_contact_person_company") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+              </div>
+              <div class="form-group required spid">
+                <label class="control-label required">
+                  <%=translation.saml2.label13%>
+                </label>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_company">
+                    <%=translation.saml2.label14%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_company" name="spid_credentials[organization_name]" type="text" value="<%= spid_credentials.organization_name %>">
+                  </div>
+                  <% if (errors.indexOf("organization_name") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input">
+                  <label class="control-label required" for="id_company">
+                    <%=translation.saml2.label15%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_company" name="spid_credentials[organization_url]" type="text" value="<%= spid_credentials.organization_url %>">
+                  </div>
+                  <% if (errors.indexOf("organization_url") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+                <div class="spid_input_company">
+                  <label class="control-label required" for="id_company">
+                    <%=translation.saml2.label16%>
+                  </label>
+                  <div class="">
+                    <input class="form-control" id="id_company" name="spid_credentials[organization_nif]" type="text" value="<%= spid_credentials.organization_nif %>">
+                  </div>
+                  <% if (errors.indexOf("organization_nif") != -1) { %>
+                  <span class="help-block alert alert-danger ">
+                    <%=translation.saml2.required_field%>
+                  </span>
+                  <% } %>
+                </div>
+              </div>
+
+              <div class="form-group required spid">
+                <label class="control-label group required">
+                  <%=translation.saml2.label17%>
+                </label>
+                <div class="spid_input_company">
+                  <div class="">
+                    <div class="select-multiple form-group">
+                      <select id="sp_type" name="spid_credentials[sp_type]" class="selectpicker" data-size="2" data-width="100%" data-dropup-auto="false">
+                        <% if (spid_credentials.sp_type === 'public') { %>
+                        <option selected value="public">
+                          <%=translation.saml2.public_option%>
+                        </option>
+                        <option value="private">
+                          <%=translation.saml2.private_option%>
+                        </option>
+                        <% } else { %>
+                        <option value="public">
+                          <%=translation.saml2.public_option%>
+                        </option>
+                        <option selected="" value="private">
+                          <%=translation.saml2.private_option%>
+                        </option>
+                        <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <% if (errors.indexOf("sp_type") != -1) { %>
+                  <span class="help-block alert alert-danger" style="margin-top: 55px">
+                    <%=translation.saml2.alert01%>
+                  </span>
+                  <% } %>
+                </div>
+              </div>
+
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+              <%=translation.saml2.edit_spid.update_btn%>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default ">
+    <div class="panel-body">
+      <div class="edit update-avatar-modal">
+        <div class="modal-header">
+          <h3>
+            <%=translation.saml2.edit_spid.title02%>
+          </h3>
+        </div>
+        <form id="spid_attributes" ng-controller="DummyCtrl" name="" autocomplete="" class="ng-scope ng-pristine ng-valid" action="/idm/applications/<%= application.id %>/edit/spid/attributes?_method=put" method="POST" enctype="">
+          <input type='hidden' name='_csrf' value='<%= csrf_token%>' />
+          <div class="modal-body clearfix">
+            <fieldset class="row">
+              <div id="spid_attributes_column" class="extra col-md-12">
+                <div class="attribute" style="display: flex;">
+                  <label>
+                    <input disabled="" checked type="checkbox" name="Name" >
+                      <%=translation.saml2.edit_spid.name_label%>
+                      </label>
+                </div>
+                <div class="attribute">
+                  <label>
+                    <input disabled="" checked type="checkbox" name="FamilyName" >
+                      <%=translation.saml2.edit_spid.familyname_label%>
+                      </label>
+                </div>
+                <div class="attribute">
+                  <label>
+                    <input disabled="" checked type="checkbox" name="Email" >
+                      <%=translation.saml2.edit_spid.email_label%>
+                      </label>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.FiscalNumber != undefined) { %>
+                  <label><input checked type="checkbox" name="FiscalNumber" ><%=translation.saml2.edit_spid.fiscalnumber_label%></label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="FiscalNumber" >
+                      <%=translation.saml2.edit_spid.fiscalnumber_label%>
+                    </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                <% if (spid_credentials.attributes_list.SpidCode != undefined) { %>
+                  <label><input checked type="checkbox" name="SpidCode" ><%=translation.saml2.edit_spid.spidcode_label%></label>
+                  <% } else { %>
+                    <label>
+                      <input type="checkbox" name="SpidCode" >
+                        <%=translation.saml2.edit_spid.spidcode_label%>
+                        </label>
+                  <% } %>  
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.Gender != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="Gender" >
+                      <%=translation.saml2.edit_spid.gender_label%>
+                  </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="Gender" >
+                      <%=translation.saml2.edit_spid.gender_label%>
+                  </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.DateOfBirth != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="DateOfBirth" >
+                      <%=translation.saml2.edit_spid.dateofbirth_label%>
+                  </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="DateOfBirth" >
+                      <%=translation.saml2.edit_spid.dateofbirth_label%>
+                  </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.CountyOfBirth != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="CountyOfBirth" >
+                      <%=translation.saml2.edit_spid.countyofbirth_label%>
+                      </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="CountyOfBirth" >
+                      <%=translation.saml2.edit_spid.countyofbirth_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.IdCard != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="IdCard" >
+                      <%=translation.saml2.edit_spid.idcard_label%>
+                  </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="IdCard" >
+                      <%=translation.saml2.edit_spid.idcard_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.RegisteredOffice != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="RegisteredOffice" >
+                      <%=translation.saml2.edit_spid.registeredoffice_label%>
+                  </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="RegisteredOffice" >
+                      <%=translation.saml2.edit_spid.registeredoffice_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.DigitalAddress != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="DigitalAddress" >
+                      <%=translation.saml2.edit_spid.digitaladdress_label%>
+                      </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="DigitalAddress" >
+                      <%=translation.saml2.edit_spid.digitaladdress_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.PlaceOfBirth != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="PlaceOfBirth" >
+                      <%=translation.saml2.edit_spid.placeofbirth_label%>
+                      </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="PlaceOfBirth" >
+                      <%=translation.saml2.edit_spid.placeofbirth_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.CompanyName != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="CompanyName" >
+                      <%=translation.saml2.edit_spid.companyname_label%>
+                      </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="CompanyName" >
+                      <%=translation.saml2.edit_spid.companyname_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.MobilePhone != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="MobilePhone" >
+                      <%=translation.saml2.edit_spid.mobilephone_label%>
+                    </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="MobilePhone" >
+                      <%=translation.saml2.edit_spid.mobilephone_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.Address != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="Address" >
+                      <%=translation.saml2.edit_spid.address_label%>
+                    </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="Address" >
+                      <%=translation.saml2.edit_spid.address_label%>
+                      </label>
+                  <% } %>
+                </div>
+                <div class="attribute">
+                  <% if (spid_credentials.attributes_list.ExpirationDate != undefined) { %>
+                  <label>
+                    <input checked type="checkbox" name="ExpirationDate" >
+                      <%=translation.saml2.edit_spid.expirationdate_label%>
+                      </label>
+                  <% } else { %>
+                  <label>
+                    <input type="checkbox" name="ExpirationDate" >
+                      <%=translation.saml2.edit_spid.expirationdate_label%>
+                      </label>
+                  <% } %>
+                </div>
+
+
+              </div>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+              <%=translation.saml2.edit_spid.update_btn%>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="messages"></div>
+
+<script type="text/javascript">
+  $('.panel-title a:first-child').mouseover(function(){
+  $(this).children().toggleClass('fa-rotate-180');
+  });
+  $('.panel-title a:first-child').mouseleave(function(){
+  if ($(this).hasClass('collapsed')){
+  $(this).children().removeClass('fa-rotate-180');
+  } else {
+  $(this).children().addClass('fa-rotate-180');
+  }
+  });
+  $('.panel-title a:first-child').click(function(){
+  if ($(this).hasClass('collapsed')){
+  $(this).children().addClass('fa-rotate-180');
+  } else {
+  $(this).children().removeClass('fa-rotate-180');
+  }
+  });
+</script>
+
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="popover"]').popover({html:true});
+  $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
