@@ -52,10 +52,23 @@
           </span>
         </label>
       </div>
-      <button type="submit" class="btn btn-primary pull-right"><%=translation.oauth.login.loginin_btn%></button>
-      <% if (saml_request.enabled) { -%>
-        <button id="saml2_eidas_button" type="submit"  class="btn btn-primary pull-right second_submit_button" formaction="/saml2/login?response_type=<%= application.response_type %>&client_id=<%= application.id %>&state=<%= application.state %>&redirect_uri=<%= application.redirect_uri %>" ><%=translation.oauth.login.eidas_loginin_btn%></button>
-      <% } -%>
+      <button type="submit" style="margin-top: 10px;" class="btn btn-primary pull-right"><%=translation.oauth.login.loginin_btn%></button>
+      <% if (saml_request.enabled) {
+        if (saml_request.type ==="eidas") {         
+        -%>
+     
+        <button id="saml2_eidas_button" type="submit"  class="pull-right second_submit_button" formaction="/saml2/login?response_type=<%= application.response_type %>&client_id=<%= application.id %>&state=<%= application.state %>&redirect_uri=<%= application.redirect_uri %>" ><%=translation.oauth.login.eidas_loginin_btn%></button>
+      
+        <% } else {
+        %>
+        <button id="saml2_spid_button" type="submit"  class="btn btn-primary pull-right second_submit_button" formaction="/saml2/login?response_type=<%= application.response_type %>&client_id=<%= application.id %>&state=<%= application.state %>&redirect_uri=<%= application.redirect_uri %>" >
+            <a href="#" class="italia-it-button italia-it-button-size-s button-spid">
+              <span class="italia-it-button-icon"><img src="../img/spid-ico-circle-bb.svg" onerror="this.src='../img/spid-ico-circle-bb.png'; this.onerror=null;" alt="" /></span>
+              <span class="italia-it-button-text">Entra con SPID</span>
+             </a>
+        </button>
+        <%  } }%>
+        
       <div class="actions">
         <a href="/sign_up/">
           <%=translation.oauth.login.link01%>

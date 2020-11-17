@@ -33,6 +33,9 @@
     </Content>
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
+    <Content Include="public\img\spid-ico-circle-bb.png" />
+    <Content Include="public\img\spid-ico-circle-bb.svg" />
+    <Content Include="public\stylesheets\spid-button.min.css" />
     <Content Include="version.json" />
     <Content Include="README.md" />
     <Content Include="roadmap.md" />

@@ -16,8 +16,9 @@ const config_attributes_representative = Object.keys(config_attributes.Represent
 // Select SAML authentication (Eidas or Spid)
 const saml_authentication = config.eidas.enabled ? 'eidas' : (config.spid.enabled ? 'spid' : 'none');
 
+const spid_controller = require('./spid');
 // Create identity provider (if eidas is enables, takes precedence, otherwise SPID is configured)
-const idm_options = undefined;
+let idm_options;
 if (saml_authentication === 'eidas')
     idp_options = {
         sso_login_url: config.eidas.node_host || config.eidas.idp_host, // config.eidas.idp_host should be deprectated
@@ -505,6 +506,8 @@ exports.search_spid_credentials = function (req, res, next) {
                             'https://www.spid.gov.it/SpidL2',
                             'https://www.spid.gov.it/SpidL3']
                     },
+                    attributes_list: credentials.attributes_list,
+                    saml_type: saml_authentication,
                     force_authn: true,
                     organization,
                     contact,
@@ -634,52 +637,12 @@ exports.create_auth_request = function (req, res, next) {
     if (saml_authentication === 'eidas')
         create_eidas_auth_request(req, res, next);
     else
-        create_spid_auth_request(req, res, next);
+        spid_controller.create_spid_auth_request(idp, req, res, next);
 
 
 }
 
-// Create auth xml request for Spid to be send to the idp
-function create_spid_auth_request(req, res, next) {
-    if (req.sp) {
 
-        const extensions = {
-            'md:RequestedAttributes': []
-        };
-
-        extensions['<md:RequestedAttributes'].push({
-            '<md:RequestedAttribute': req.spid_credentials.attributes_list.Name
-        });
-
-        extensions['<md:RequestedAttributes'].push({
-            '<md:RequestedAttribute': req.spid_credentials.attributes_list.FamilyName
-        });
-
-        extensions['<md:RequestedAttributes'].push({
-            '<md:RequestedAttribute': req.spid_credentials.attributes_list.Email
-        });
-
-        const auth_request = req.sp.create_authn_request_xml(idp, {
-            extensions
-        });
-
-        sp_states[auth_request.id] = get_state(req.url);
-        sp_redirect_uris[auth_request.id] = get_redirect_uri(req.url);
-
-        req.saml_auth_request = {
-            xml: auth_request.request,
-            // eslint-disable-next-line snakecase/snakecase
-            postLocationUrl:
-                'https://' + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
-            // eslint-disable-next-line snakecase/snakecase
-            redirectLocationUrl:
-                'https://' + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login'
-        };
-        next();
-    } else {
-        next();
-    }
-};
 
 // Create auth xml request for Eidas to be send to the idp
 function create_eidas_auth_request(req, res, next) {

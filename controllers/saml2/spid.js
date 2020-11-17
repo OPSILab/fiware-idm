@@ -6,6 +6,10 @@ const spid_attributes = require('../../etc/spid/requested_attributes.json');
 const spid_attributes_keys = Object.keys(spid_attributes);
 const saml_controller = require('./saml2');
 
+
+const sp_states = {};
+const sp_redirect_uris = {};
+
 // GET /idm/applications/:application_id/step/spid -- Form to add SPID credentials to application
 exports.step_new_spid_credentials = function (req, res) {
     debug('--> step_new_spid_credentials');
@@ -28,9 +32,9 @@ exports.step_create_spid_credentials = function (req, res) {
 
     spid_credentials.attributes_list = {
         // eslint-disable-next-line snakecase/snakecase
-        Name: "",
-        FamilyName: "",
-        Email: ""
+        name: "",
+        familyName: "",
+        email: ""
     };
 
     return spid_credentials
@@ -169,9 +173,9 @@ exports.update_spid_attributes = function (req, res) {
     debug('--> update_spid_attributes');
 
     const attributes_list = {
-        "FirstName": "",
-        "FamilyName": "",
-        "Email": ""
+        "firstName": "",
+        "familyName": "",
+        "email": ""
     };
 
     for (const key of Object.keys(req.body)) {
@@ -218,4 +222,79 @@ exports.update_spid_attributes = function (req, res) {
             };
             res.redirect('/idm/applications/' + req.application.id);
         });
+};
+
+// Create auth xml request for Spid to be send to the idp
+exports.create_spid_auth_request = function (idp, req, res, next) {
+    if (req.sp) {
+
+        const extensions = {
+            'md:RequestedAttributes': []
+        };
+
+        //extensions['md:RequestedAttributes'].push({
+        //    '<md:RequestedAttribute': req.spid_credentials.attributes_list.Name
+        //});
+
+        //extensions['md:RequestedAttributes'].push({
+        //    '<md:RequestedAttribute': req.spid_credentials.attributes_list.FamilyName
+        //});
+
+        //extensions['md:RequestedAttributes'].push({
+        //    '<md:RequestedAttribute': req.spid_credentials.attributes_list.Email
+        //});
+
+        //for (const attribute of Object.keys(req.spid_credentials.attributes_list)) {
+
+        //    if (spid_attributes_keys.includes(attribute))
+        //        extensions['md:RequestedAttributes'].push({
+        //            'md:RequestedAttribute': attribute
+        //        });
+        //}
+
+
+        const auth_request = req.sp.create_authn_request_xml(idp, {
+            extensions
+        });
+
+        sp_states[auth_request.id] = get_state(req.url);
+        sp_redirect_uris[auth_request.id] = get_redirect_uri(req.url);
+
+        req.saml_auth_request = {
+            xml: auth_request.request,
+            // eslint-disable-next-line snakecase/snakecase
+            postLocationUrl:
+                'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
+            // eslint-disable-next-line snakecase/snakecase
+            redirectLocationUrl:
+                'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login'
+        };
+        next();
+    } else {
+        next();
+    }
+};
+
+const get_redirect_uri = function (url) {
+    const params = url.split('?')[1].split('&');
+    let redirect_uri = '';
+    for (const p in params) {
+        if (params[p].split('=')[0] === 'redirect_uri') {
+            redirect_uri = params[p].split('=')[1];
+        }
+    }
+
+    return redirect_uri;
+};
+
+const get_state = function (url) {
+    const params = url.split('?')[1].split('&');
+    let state = '';
+    for (const p in params) {
+        if (params[p].split('=')[0] === 'state') {
+            state = params[p].split('=')[1];
+        }
+    }
+
+    return state;
 };

@@ -256,181 +256,181 @@
               <div id="spid_attributes_column" class="extra col-md-12">
                 <div class="attribute" style="display: flex;">
                   <label>
-                    <input disabled="" checked type="checkbox" name="Name" >
+                    <input disabled="" checked type="checkbox" name="name" >
                       <%=translation.saml2.edit_spid.name_label%>
                       </label>
                 </div>
                 <div class="attribute">
                   <label>
-                    <input disabled="" checked type="checkbox" name="FamilyName" >
+                    <input disabled="" checked type="checkbox" name="familyName" >
                       <%=translation.saml2.edit_spid.familyname_label%>
                       </label>
                 </div>
                 <div class="attribute">
                   <label>
-                    <input disabled="" checked type="checkbox" name="Email" >
+                    <input disabled="" checked type="checkbox" name="email" >
                       <%=translation.saml2.edit_spid.email_label%>
                       </label>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.FiscalNumber != undefined) { %>
-                  <label><input checked type="checkbox" name="FiscalNumber" ><%=translation.saml2.edit_spid.fiscalnumber_label%></label>
+                  <% if (spid_credentials.attributes_list.fiscalNumber != undefined) { %>
+                  <label><input checked type="checkbox" name="fiscalNumber" ><%=translation.saml2.edit_spid.fiscalnumber_label%></label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="FiscalNumber" >
+                    <input type="checkbox" name="fiscalNumber" >
                       <%=translation.saml2.edit_spid.fiscalnumber_label%>
                     </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                <% if (spid_credentials.attributes_list.SpidCode != undefined) { %>
-                  <label><input checked type="checkbox" name="SpidCode" ><%=translation.saml2.edit_spid.spidcode_label%></label>
+                <% if (spid_credentials.attributes_list.spidCode != undefined) { %>
+                  <label><input checked type="checkbox" name="spidCode" ><%=translation.saml2.edit_spid.spidcode_label%></label>
                   <% } else { %>
                     <label>
-                      <input type="checkbox" name="SpidCode" >
+                      <input type="checkbox" name="spidCode" >
                         <%=translation.saml2.edit_spid.spidcode_label%>
                         </label>
                   <% } %>  
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.Gender != undefined) { %>
+                  <% if (spid_credentials.attributes_list.gender != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="Gender" >
+                    <input checked type="checkbox" name="gender" >
                       <%=translation.saml2.edit_spid.gender_label%>
                   </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="Gender" >
+                    <input type="checkbox" name="gender" >
                       <%=translation.saml2.edit_spid.gender_label%>
                   </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.DateOfBirth != undefined) { %>
+                  <% if (spid_credentials.attributes_list.dateOfBirth != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="DateOfBirth" >
+                    <input checked type="checkbox" name="dateOfBirth" >
                       <%=translation.saml2.edit_spid.dateofbirth_label%>
                   </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="DateOfBirth" >
+                    <input type="checkbox" name="dateOfBirth" >
                       <%=translation.saml2.edit_spid.dateofbirth_label%>
                   </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.CountyOfBirth != undefined) { %>
+                  <% if (spid_credentials.attributes_list.countyOfBirth != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="CountyOfBirth" >
+                    <input checked type="checkbox" name="countyOfBirth" >
                       <%=translation.saml2.edit_spid.countyofbirth_label%>
                       </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="CountyOfBirth" >
+                    <input type="checkbox" name="countyOfBirth" >
                       <%=translation.saml2.edit_spid.countyofbirth_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.IdCard != undefined) { %>
+                  <% if (spid_credentials.attributes_list.idCard != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="IdCard" >
+                    <input checked type="checkbox" name="idCard" >
                       <%=translation.saml2.edit_spid.idcard_label%>
                   </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="IdCard" >
+                    <input type="checkbox" name="idCard" >
                       <%=translation.saml2.edit_spid.idcard_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.RegisteredOffice != undefined) { %>
+                  <% if (spid_credentials.attributes_list.registeredOffice != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="RegisteredOffice" >
+                    <input checked type="checkbox" name="registeredOffice" >
                       <%=translation.saml2.edit_spid.registeredoffice_label%>
                   </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="RegisteredOffice" >
+                    <input type="checkbox" name="registeredOffice" >
                       <%=translation.saml2.edit_spid.registeredoffice_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.DigitalAddress != undefined) { %>
+                  <% if (spid_credentials.attributes_list.digitalAddress != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="DigitalAddress" >
+                    <input checked type="checkbox" name="digitalAddress" >
                       <%=translation.saml2.edit_spid.digitaladdress_label%>
                       </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="DigitalAddress" >
+                    <input type="checkbox" name="digitalAddress" >
                       <%=translation.saml2.edit_spid.digitaladdress_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.PlaceOfBirth != undefined) { %>
+                  <% if (spid_credentials.attributes_list.placeOfBirth != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="PlaceOfBirth" >
+                    <input checked type="checkbox" name="placeOfBirth" >
                       <%=translation.saml2.edit_spid.placeofbirth_label%>
                       </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="PlaceOfBirth" >
+                    <input type="checkbox" name="placeOfBirth" >
                       <%=translation.saml2.edit_spid.placeofbirth_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.CompanyName != undefined) { %>
+                  <% if (spid_credentials.attributes_list.companyName != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="CompanyName" >
+                    <input checked type="checkbox" name="companyName" >
                       <%=translation.saml2.edit_spid.companyname_label%>
                       </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="CompanyName" >
+                    <input type="checkbox" name="companyName" >
                       <%=translation.saml2.edit_spid.companyname_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.MobilePhone != undefined) { %>
+                  <% if (spid_credentials.attributes_list.mobilePhone != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="MobilePhone" >
+                    <input checked type="checkbox" name="mobilePhone" >
                       <%=translation.saml2.edit_spid.mobilephone_label%>
                     </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="MobilePhone" >
+                    <input type="checkbox" name="mobilePhone" >
                       <%=translation.saml2.edit_spid.mobilephone_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.Address != undefined) { %>
+                  <% if (spid_credentials.attributes_list.address != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="Address" >
+                    <input checked type="checkbox" name="address" >
                       <%=translation.saml2.edit_spid.address_label%>
                     </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="Address" >
+                    <input type="checkbox" name="address" >
                       <%=translation.saml2.edit_spid.address_label%>
                       </label>
                   <% } %>
                 </div>
                 <div class="attribute">
-                  <% if (spid_credentials.attributes_list.ExpirationDate != undefined) { %>
+                  <% if (spid_credentials.attributes_list.expirationDate != undefined) { %>
                   <label>
-                    <input checked type="checkbox" name="ExpirationDate" >
+                    <input checked type="checkbox" name="expirationDate" >
                       <%=translation.saml2.edit_spid.expirationdate_label%>
                       </label>
                   <% } else { %>
                   <label>
-                    <input type="checkbox" name="ExpirationDate" >
+                    <input type="checkbox" name="expirationDate" >
                       <%=translation.saml2.edit_spid.expirationdate_label%>
                       </label>
                   <% } %>

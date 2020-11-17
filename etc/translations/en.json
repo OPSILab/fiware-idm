@@ -894,6 +894,7 @@
       "checkbox": "remember me",
       "loginin_btn": "Sign In",
       "eidas_loginin_btn": "Sign eID",
+      "spid_loginin_btn": "Sign in with SPID",
       "link01": "Sign up",
       "link02": "Forgot password",
       "link03": "Confirmation not recieved?"

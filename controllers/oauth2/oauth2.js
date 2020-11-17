@@ -143,6 +143,7 @@ exports.check_user = function (req, res, next) {
             render_values.saml_request.postLocationUrl = req.saml_auth_request.postLocationUrl;
             render_values.saml_request.redirectLocationUrl = req.saml_auth_request.redirectLocationUrl;
             render_values.saml_request.enabled = true;
+            render_values.saml_request.type = config_eidas.enabled ? "eidas" : "spid";
         }
 
         res.render('oauth/index', render_values);
