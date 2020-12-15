@@ -3,12 +3,11 @@ const models = require('../../models/models.js');
 const config_service = require('../../lib/configService.js');
 const config = config_service.get_config();
 const spid_attributes = require('../../etc/spid/requested_attributes.json');
-const spid_attributes_keys = Object.keys(spid_attributes);
 const saml_controller = require('./saml2');
 
 
-const sp_states = {};
-const sp_redirect_uris = {};
+exports.sp_states = {};
+exports.sp_redirect_uris = {};
 
 // GET /idm/applications/:application_id/step/spid -- Form to add SPID credentials to application
 exports.step_new_spid_credentials = function (req, res) {
@@ -228,37 +227,17 @@ exports.update_spid_attributes = function (req, res) {
 exports.create_spid_auth_request = function (idp, req, res, next) {
     if (req.sp) {
 
-        const extensions = {
-            'md:RequestedAttributes': []
+        const extensions = {  
         };
-
-        //extensions['md:RequestedAttributes'].push({
-        //    '<md:RequestedAttribute': req.spid_credentials.attributes_list.Name
-        //});
-
-        //extensions['md:RequestedAttributes'].push({
-        //    '<md:RequestedAttribute': req.spid_credentials.attributes_list.FamilyName
-        //});
-
-        //extensions['md:RequestedAttributes'].push({
-        //    '<md:RequestedAttribute': req.spid_credentials.attributes_list.Email
-        //});
-
-        //for (const attribute of Object.keys(req.spid_credentials.attributes_list)) {
-
-        //    if (spid_attributes_keys.includes(attribute))
-        //        extensions['md:RequestedAttributes'].push({
-        //            'md:RequestedAttribute': attribute
-        //        });
-        //}
 
 
         const auth_request = req.sp.create_authn_request_xml(idp, {
-            extensions
+            extensions,
+            saml_type : 'spid'
         });
 
-        sp_states[auth_request.id] = get_state(req.url);
-        sp_redirect_uris[auth_request.id] = get_redirect_uri(req.url);
+        exports.sp_states[auth_request.id] = get_state(req.url);
+        exports.sp_redirect_uris[auth_request.id] = get_redirect_uri(req.url);
 
         req.saml_auth_request = {
             xml: auth_request.request,

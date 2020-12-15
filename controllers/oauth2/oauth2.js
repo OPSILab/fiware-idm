@@ -3,6 +3,7 @@ const create_oauth_response = require('../../models/model_oauth_server.js').crea
 const config_service = require('../../lib/configService.js');
 const config_eidas = config_service.get_config().eidas;
 const config_spid = config_service.get_config().spid;
+const host = config_service.get_config().host;
 const config_oauth2 = config_service.get_config().oauth2;
 const user_controller = require('../../controllers/web/users');
 const OauthServer = require('oauth2-server'); //eslint-disable-line snakecase/snakecase
@@ -11,6 +12,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const url = require('url');
 const Request = OauthServer.Request;
 const Response = OauthServer.Response;
+const client = require('request-promise-native');
 
 const debug = require('debug')('idm:oauth_controller');
 
@@ -55,7 +57,7 @@ exports.response_type_required = function (req, res, next) {
         !req.query.response_type ||
         !(req.query.response_type.includes('code') || req.query.response_type.includes('token'))
     ) {
-        // Reponse with message
+        // Response with message
         const err = new Error('invalid_request: response_type not valid or not exist');
         err.status = 400;
         debug('Error ', err.message);

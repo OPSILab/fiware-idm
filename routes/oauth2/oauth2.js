@@ -17,6 +17,7 @@ const saml_authentication = config.eidas.enabled ? 'eidas' : (config.spid.enable
 // Routes for Oauth2
 //router.get('/authenticate',    	oauth_controller.authenticate_token);
 router.post('/token', oauth_controller.token);
+
 if (saml_authentication === 'eidas' || saml_authentication === 'spid') {
     router.get(
         '/authorize',

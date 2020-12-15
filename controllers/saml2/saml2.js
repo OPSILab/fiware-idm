@@ -18,7 +18,7 @@ const saml_authentication = config.eidas.enabled ? 'eidas' : (config.spid.enable
 
 const spid_controller = require('./spid');
 // Create identity provider (if eidas is enables, takes precedence, otherwise SPID is configured)
-let idm_options;
+let idp_options;
 if (saml_authentication === 'eidas')
     idp_options = {
         sso_login_url: config.eidas.node_host || config.eidas.idp_host, // config.eidas.idp_host should be deprectated
@@ -27,9 +27,10 @@ if (saml_authentication === 'eidas')
     };
 else if (saml_authentication === 'spid')
     idp_options = {
-        sso_login_url: config.spid.node_host + '/sso', // config.eidas.idp_host should be deprectated
+        sso_login_url: config.spid.node_host, // config.eidas.idp_host should be deprectated
         sso_logout_url: 'https://' + config.spid.gateway_host + '/saml2/logout',
-        certificates: []
+        certificates: [],
+        nameid_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
     };
 
 const idp = new saml2.IdentityProvider(idp_options);
@@ -281,14 +282,19 @@ exports.login = function (req, res) {
     delete req.body.email;
     delete req.body.password;
     delete req.query;
-    res.redirect(307, idp.sso_login_url);
+    if (saml_authentication === 'spid')
+        res.redirect(307, idp.sso_login_url + '/sso');
+    else
+        res.redirect(307, idp.sso_login_url);
 };
 
 // POST /idm/applications/:application_id/saml2/login -- Response from eIDAs or SPID with user credentials
 exports.saml2_application_login = function (req, res) {
     debug('--> saml2_application_login', req.url);
 
-    const options = { request_body: req.body };
+    const options = {
+        request_body: req.body, saml_type: saml_authentication
+    };
 
     return req.sp.post_assert(idp, options, function (error, saml_response) {
         if (error != null) {
@@ -298,11 +304,11 @@ exports.saml2_application_login = function (req, res) {
 
         // Save name_id and session_index for logout
         // Note:  In practice these should be saved in the user session, not globally.
-        const name_id = undefined;
+        let name_id;
         if (saml_authentication === 'eidas')
             name_id = saml_response.user.attributes.PersonIdentifier[0];
         else
-            name_id = saml_response.user.attributes.Name;
+            name_id = saml_response.user.attributes.name[0];
 
         // Commented beacuase no session index was returned when testing was performed
         //var session_index = saml_response.user.session_index;
@@ -318,7 +324,7 @@ exports.saml2_application_login = function (req, res) {
                 if (saml_authentication === 'eidas')
                     saml_profile[key] = saml_response.user.attributes[key][0];
                 else
-                    saml_profile[key] = saml_response.user.attributes[key];
+                    saml_profile[key] = saml_response.user.attributes[key][0];
             }
         }
 
@@ -338,11 +344,19 @@ exports.saml2_application_login = function (req, res) {
                     oauth_sign_in: true
                 };
 
-                const state = sp_states[response_to] ? sp_states[response_to] : 'xyz';
+                let state;
+                let redirect_uri;
+                if (saml_authentication === 'spid') {
 
-                const redirect_uri = sp_redirect_uris[response_to]
-                    ? sp_redirect_uris[response_to]
-                    : req.application.redirect_uri.split(',')[0];
+                    state = spid_controller.sp_states[response_to] ? spid_controller.sp_states[response_to] : 'xyz';
+                    redirect_uri = spid_controller.sp_redirect_uris[response_to]
+                        ? spid_controller.sp_redirect_uris[response_to] : req.application.redirect_uri[0].split(',')[0];
+                } else {
+                    state = sp_states[response_to] ? sp_states[response_to] : 'xyz';
+                    redirect_uri = sp_redirect_uris[response_to]
+                        ? sp_redirect_uris[response_to] : req.application.redirect_uri.split(',')[0];
+                }
+
 
                 const path =
                     '/oauth2/authorize?' +
@@ -377,7 +391,11 @@ function create_user(name_id, new_saml_profile) {
 
         return models.user
             .findOne({
-                where: { [saml_authentication + '_id']: name_id }
+                where: {
+                    [saml_authentication + '_id']: saml_authentication === 'eidas' ?
+                        name_id :
+                        name_id + '_' + new_saml_profile.familyName
+                }
             })
             .then(function (user) {
                 if (user) {
@@ -411,7 +429,7 @@ function create_user(name_id, new_saml_profile) {
                 if (saml_authentication === 'eidas')
                     return models.user
                         .build({
-                            username: new_saml_profile.FirstName + ' ' + new_saml_profile.FamilyName,
+                            username: new_saml_profile.FirstName + '_' + new_saml_profile.FamilyName,
                             eidas_id: name_id,
                             email: new_saml_profile.Email ? new_saml_profile.Email : null,
                             image: image_name !== 'default' ? image_name : 'default',
@@ -422,9 +440,9 @@ function create_user(name_id, new_saml_profile) {
                 else // SPID Authentication
                     return models.user
                         .build({
-                            username: new_saml_profile.FirstName + ' ' + new_saml_profile.FamilyName,
-                            spid_id: name_id,
-                            email: new_saml_profile.Email ? new_saml_profile.Email : null,
+                            username: new_saml_profile.name + '_' + new_saml_profile.familyName,
+                            spid_id: name_id + '_' + new_saml_profile.familyName,
+                            email: new_saml_profile.email ? new_saml_profile.email : null,
                             image: image_name !== 'default' ? image_name : 'default',
                             extra: { saml_profile: new_saml_profile },
                             enabled: true
@@ -496,15 +514,15 @@ exports.search_spid_credentials = function (req, res, next) {
                         'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
                     audience: 'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
                     sign_get_request: true,
-                    nameid_format: 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
+                    nameid_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
                     provider_name: credentials.organization_nif,
                     auth_context: {
                         comparison: 'minimum',
                         // eslint-disable-next-line snakecase/snakecase
                         AuthnContextClassRef: [
-                            'https://www.spid.gov.it/SpidL1',
-                            'https://www.spid.gov.it/SpidL2',
-                            'https://www.spid.gov.it/SpidL3']
+                            // 'https://www.spid.gov.it/SpidL1',
+                            'https://www.spid.gov.it/SpidL2']
+                        //'https://www.spid.gov.it/SpidL3']
                     },
                     attributes_list: credentials.attributes_list,
                     saml_type: saml_authentication,
@@ -638,8 +656,6 @@ exports.create_auth_request = function (req, res, next) {
         create_eidas_auth_request(req, res, next);
     else
         spid_controller.create_spid_auth_request(idp, req, res, next);
-
-
 }
 
 
@@ -674,7 +690,8 @@ function create_eidas_auth_request(req, res, next) {
         }
 
         const auth_request = req.sp.create_authn_request_xml(idp, {
-            extensions
+            extensions,
+            saml_type: 'spid'
         });
 
         sp_states[auth_request.id] = get_state(req.url);

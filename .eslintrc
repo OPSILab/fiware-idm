@@ -7,9 +7,10 @@
     "snakecase"
   ],
   "rules": {
-  	"camelcase": 0,
-  	"snakecase/snakecase": "error",
+    "camelcase": 0,
+    "snakecase/snakecase": "warning",
     "valid-jsdoc": 0,
-    "no-shadow": 0
+    "no-shadow": 0,
+    "curly": [ 2, "multi-or-nest" ]
   }
 }
