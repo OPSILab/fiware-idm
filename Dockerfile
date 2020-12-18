@@ -22,11 +22,11 @@ ENV PYTHONUNBUFFERED=1
 #    pip3 install --no-cache --upgrade pip setuptools
 
 # hadolint ignore=DL3018,DL3013
-RUN apk --no-cache add git python2 make gcc g++ ca-certificates openssl && \
+RUN apk update && \
+    apk --no-cache add git python2 make gcc g++ ca-certificates openssl unzip && \
     python -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip install --upgrade pip setuptools
-
 WORKDIR /opt/fiware-idm
 COPY . /opt/fiware-idm
 
@@ -83,7 +83,9 @@ ENV IDM_HOST="http://localhost:3000" \
 
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache ca-certificates bash
+RUN apk add --no-cache ca-certificates bash openssl
+
+RUN mkdir /opt/fiware-idm/certs/applications &&  chmod -R 777 /opt/fiware-idm/certs/applications
 
 LABEL "maintainer"="FIWARE Identity Manager Team. DIT-UPM"
 LABEL "org.opencontainers.image.authors"=""

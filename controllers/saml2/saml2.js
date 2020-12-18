@@ -19,18 +19,20 @@ const saml_authentication = config.eidas.enabled ? 'eidas' : (config.spid.enable
 const spid_controller = require('./spid');
 // Create identity provider (if eidas is enables, takes precedence, otherwise SPID is configured)
 let idp_options;
-if (saml_authentication === 'eidas')
-    idp_options = {
-        sso_login_url: config.eidas.node_host || config.eidas.idp_host, // config.eidas.idp_host should be deprectated
-        sso_logout_url: 'https://' + config.eidas.gateway_host + '/saml2/logout',
-        certificates: []
-    };
-else if (saml_authentication === 'spid')
+
+
+if (saml_authentication === 'spid')
     idp_options = {
         sso_login_url: config.spid.node_host, // config.eidas.idp_host should be deprectated
         sso_logout_url: 'https://' + config.spid.gateway_host + '/saml2/logout',
         certificates: [],
         nameid_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
+    };
+else
+    idp_options = {
+        sso_login_url: config.eidas.node_host || config.eidas.idp_host, // config.eidas.idp_host should be deprectated
+        sso_logout_url: 'https://' + config.eidas.gateway_host + '/saml2/logout',
+        certificates: []
     };
 
 const idp = new saml2.IdentityProvider(idp_options);

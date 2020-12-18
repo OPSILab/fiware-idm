@@ -1,17 +1,17 @@
 const config = {};
 
 config.port = 3000;
-config.host = 'https://localhost:444';
+config.host = 'http://localhost:3000';
 
 config.debug = true;
 
 // HTTPS enable
 config.https = {
-  enabled: true,
-  cert_file: 'certs/server.crt',
-  key_file: 'certs/server.key',
+  enabled: false,
+  cert_file: 'certs/idm-2018-cert.pem',
+  key_file: 'certs/idm-2018-key.pem',
   ca_certs: [],
-  port: 444,
+  port: 443
 };
 
 // Config email list type to use domain filtering
@@ -157,8 +157,8 @@ config.eidas = {
 
 // Config Spid Configuration
 config.spid = {
-    enabled: true,
-    gateway_host: 'localhost:444',
+    enabled: false,
+    gateway_host: 'localhost:3000',
     node_host: 'https://idptest.spid.gov.it',
     metadata_expiration: 60 * 60 * 24 * 365, // One year
 };
