@@ -56,36 +56,36 @@ router.post(
 router.post('/revoke', oauth_controller.revoke_token);
 
 // catch 404 and forward to error handler
-router.use(function (req, res) {
-    const err = new Error('Path not Found');
-    err.status = 404;
-    if (req.useragent.isDesktop) {
-        res.locals.error = err;
-        res.render('errors/not_found');
-    } else {
-        res.status(404).json(err.message);
-    }
+router.use(function(req, res) {
+  const err = new Error('Path not Found');
+  err.status = 404;
+  if (req.useragent.isDesktop) {
+    res.locals.error = err;
+    res.render('errors/not_found');
+  } else {
+    res.status(404).json(err.message);
+  }
 });
 
 // Error handler
 /* eslint-disable no-unused-vars */
-router.use(function (err, req, res, next) {
-    /* eslint-enable no-unused-vars */
-    debug(err);
-    err.status = err.status || 500;
-    // set locals, only providing error in development
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-    // render the error page
-    res.status(err.status);
-    if (req.useragent.isDesktop) {
-        res.locals.error = err;
-        res.render('errors/oauth', {
-            query: req.query,
-            application: req.application,
-        });
-    } else {
-        res.send(err.message);
-    }
+router.use(function(err, req, res, next) {
+  /* eslint-enable no-unused-vars */
+  debug(err);
+  err.status = err.status || 500;
+  // set locals, only providing error in development
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // render the error page
+  res.status(err.status);
+  if (req.useragent.isDesktop) {
+    res.locals.error = err;
+    res.render('errors/oauth', {
+      query: req.query,
+      application: req.application,
+    });
+  } else {
+    res.send(err.message);
+  }
 });
 
 module.exports = router;

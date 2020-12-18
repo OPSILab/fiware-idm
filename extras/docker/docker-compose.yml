@@ -1,12 +1,12 @@
 version: "3.5"
 services:
   keyrock:
-    image: fiware/idm:7.9.0
+    image: capesuite/idm
     container_name: fiware-keyrock
     hostname: keyrock
     networks:
       default:
-        ipv4_address: 172.18.1.5
+        ipv4_address: 172.25.1.5
     depends_on:
       - mysql-db
     ports:
@@ -39,7 +39,7 @@ services:
       - "3306:3306"
     networks:
       default:
-        ipv4_address: 172.18.1.6
+        ipv4_address: 172.25.1.6
     environment:
       # Development use only 
       # Use Docker Secrets for Sensitive Data
@@ -70,7 +70,7 @@ services:
       - SMTP_PASSWORD=<password> # Password to connect to the external relay
       - EXT_RELAY_HOST=<hostname> # External relay DNS name
       - EXT_RELAY_PORT=25
-      - ACCEPTED_NETWORKS=172.18.1.0/24
+      - ACCEPTED_NETWORKS=172.25.1.0/24
       - USE_TLS=no
 
 
@@ -78,6 +78,6 @@ networks:
   default:
     ipam:
       config:
-        - subnet: 172.18.1.0/24
+        - subnet: 172.25.1.0/24
 volumes:
   mysql-db: ~
