@@ -155,6 +155,14 @@ config.eidas = {
   metadata_expiration: 60 * 60 * 24 * 365 // One year
 };
 
+// Config Spid Configuration
+config.spid = {
+    enabled: false,
+    gateway_host: 'localhost:3000',
+    node_host: 'https://idptest.spid.gov.it',
+    metadata_expiration: 60 * 60 * 24 * 365, // One year
+};
+
 // Enables the possibility of adding identity attributes in users' profile
 config.identity_attributes = {
   /* eslint-disable snakecase/snakecase */

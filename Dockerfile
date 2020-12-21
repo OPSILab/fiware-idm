@@ -180,6 +180,9 @@ HEALTHCHECK  --interval=30s --timeout=3s --start-period=60s \
 # ENV IDM_EIDAS_GATEWAY_HOST "localhost"
 # ENV IDM_EIDAS_NODE_HOST "https://se-eidas.redsara.es/EidasNode/ServiceProvider"
 # ENV IDM_EIDAS_METADATA_LIFETIME "31536000"
+# ENV IDM_SPID_ENABLED false
+# ENV IDM_SPID_GATEWAY_HOST "localhost"
+# ENV IDM_SPID_NODE_HOST ""
 
 # ENV IDM_ADMIN_ID    "admin"
 # ENV IDM_ADMIN_USER  "admin"

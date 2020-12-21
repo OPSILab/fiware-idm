@@ -31,7 +31,7 @@ services:
       - IDM_ADMIN_EMAIL=admin@test.com
       - IDM_ADMIN_PASS=1234
       # If sending eMails point to any STMP server
-      - IDM_SPID_ENABLED=false
+      - IDM_SPID_ENABLED=true
       - IDM_SPID_GATEWAY_HOST=localhost:3000
       - IDM_SPID_NODE_HOST=https://idptest.spid.gov.it/
 
