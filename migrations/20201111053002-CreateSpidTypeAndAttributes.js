@@ -12,7 +12,7 @@ module.exports = {
         defaultValue: 'private',
       }),
       queryInterface.addColumn('spid_credentials', 'attributes_list', {
-        type: Sequelize.TEXT(),
+        type: Sequelize.JSON(),
         get() {
           return this.getDataValue('attributes_list')
             ? JSON.parse(this.getDataValue('attributes_list'))

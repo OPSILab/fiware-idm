@@ -83,7 +83,7 @@ ENV IDM_HOST="http://localhost:3000" \
 
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache ca-certificates bash openssl
+RUN apk add --no-cache ca-certificates bash openssl sudo nano
 
 RUN mkdir /opt/fiware-idm/certs/applications &&  chmod -R 777 /opt/fiware-idm/certs/applications
 
@@ -97,11 +97,12 @@ LABEL "org.opencontainers.image.description"="OAuth2-based authentication of use
 LABEL "org.opencontainers.image.source"=https://github.com/${GITHUB_ACCOUNT}/${GITHUB_REPOSITORY}
 LABEL "org.nodejs.version"=${NODE_VERSION}
 
-USER node
+USER root
 ENV NODE_ENV=production
 # Ports used by application
 EXPOSE ${IDM_PORT:-3000}
-CMD ["npm", "start"]
+EXPOSE 9229
+CMD ["npm", "run", "start-debug"]
 HEALTHCHECK  --interval=30s --timeout=3s --start-period=60s \
   CMD ["npm", "healthcheck"]
 

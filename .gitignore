@@ -12,3 +12,5 @@ helpers/custom_authentication_driver.js
 config.js
 certs_dev/
 .vs/
+.vs/fiware-idm/v16/.suo
+obj/Debug/fiware-idm.njsprojAssemblyReference.cache

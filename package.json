@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./bin/www",
+	  "start-debug": "node --inspect=0.0.0.0 ./bin/www",
     "healthcheck": "node ./bin/healthcheck.js",
     "debug": "sudo DEBUG=idm:*,oauth2-server:*  nodemon --ignore 'public/' --ignore 'views/' start",
     "create_db": "./node_modules/.bin/sequelize --env database db:create",
