@@ -33,15 +33,15 @@ config.password_encryption = {
 
 // Enable CORS
 config.cors = {
-  enabled: false,
+  enabled: true,
   options: {
     /* eslint-disable snakecase/snakecase */
-    origin: ['*'],
+    origin: true,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: '*',
     exposedHeaders: undefined,
-    credentials: undefined,
-    maxAge: undefined,
+    credentials: true,
+    maxAge: 86400,
     preflightContinue: false,
     optionsSuccessStatus: 204
     /* eslint-enable snakecase/snakecase */
@@ -91,7 +91,7 @@ config.usage_control = {
 // Database info
 config.database = {
   host: 'localhost',
-  password: 'root',
+  password: 'secret',
   username: 'root',
   database: 'idm',
   dialect: 'mysql',

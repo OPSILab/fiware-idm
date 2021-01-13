@@ -3,7 +3,7 @@ services:
   keyrock:
     image: capesuite/idm
     build: .
-    container_name: fiware-keyrock
+    container_name: cape-keyrock
     hostname: keyrock
     networks:
       default:
@@ -12,8 +12,12 @@ services:
       - mysql-db
     ports:
       - "3000:3000"
+      - "9229:9229"
       #- "443:443"
     environment:
+      - IDM_CORS_ORIGIN=true
+      - IDM_CORS_ENABLED=true
+      - IDM_CORS_PREFLIGHT=true
       - DEBUG=idm:*
       - IDM_DB_HOST=mysql-db
       - IDM_HOST=http://localhost:3000
@@ -31,9 +35,9 @@ services:
       - IDM_ADMIN_EMAIL=admin@test.com
       - IDM_ADMIN_PASS=1234
       # If sending eMails point to any STMP server
-      - IDM_SPID_ENABLED=true
+      - IDM_SPID_ENABLED=false
       - IDM_SPID_GATEWAY_HOST=localhost:3000
-      - IDM_SPID_NODE_HOST=https://idptest.spid.gov.it/
+      - IDM_SPID_NODE_HOST=https://idptest.spid.gov.it
 
     volumes:
       - applications_certs:/opt/fiware-idm/certs/applications
@@ -53,7 +57,7 @@ services:
       # Development use only 
       # Use Docker Secrets for Sensitive Data
       - "MYSQL_ROOT_PASSWORD=secret"
-      - "MYSQL_ROOT_HOST=172.25.1.5"
+      - "MYSQL_ROOT_HOST=%"
     volumes:
       - mysql-db:/var/lib/mysql
 
@@ -85,6 +89,9 @@ services:
 
 networks:
   default:
+    driver: bridge
+    driver_opts:
+     com.docker.network.driver.mtu: 1400
     ipam:
       config:
         - subnet: 172.25.1.0/24

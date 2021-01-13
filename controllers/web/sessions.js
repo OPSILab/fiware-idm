@@ -1,6 +1,7 @@
 const gravatar = require('gravatar');
 const debug = require('debug')('idm:web-session_controller');
-const config = require('../../config');
+const config_service = require('../../lib/configService.js');
+const config = config_service.get_config();
 
 const models = require('../../models/models.js');
 const user_controller = require('./users');
@@ -503,9 +504,18 @@ exports.external_destroy = function (req, res) {
         }
 
         if (application.redirect_sign_out_uri) {
-          res.redirect(application.redirect_sign_out_uri);
+
+          if (config.cors.enabled)
+            res.send({redirect_sign_out_uri:application.redirect_sign_out_uri});
+          else
+            res.redirect(application.redirect_sign_out_uri);
+
         } else {
-          res.redirect(application.url);
+
+          if (config.cors.enabled)
+            res.send({redirect_sign_out_uri: application.url});
+          else
+            res.redirect(application.url);
         }
       } else {
         res.status(401).json('Not allowed to perform logout or bad configured');
