@@ -14,3 +14,6 @@ certs_dev/
 .vs/**
 .vscode/**
 obj/Debug/fiware-idm.njsprojAssemblyReference.cache
+obj/Debug/fiware-idm.njsprojAssemblyReference.cache
+.vscode/launch.json
+.gitignore
