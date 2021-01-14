@@ -239,14 +239,15 @@ exports.create_spid_auth_request = function (idp, req, res, next) {
         exports.sp_states[auth_request.id] = get_state(req.url);
         exports.sp_redirect_uris[auth_request.id] = get_redirect_uri(req.url);
 
+        const sp_protocol = (config.host.startsWith('https')? 'https://': 'http://');
         req.saml_auth_request = {
             xml: auth_request.request,
             // eslint-disable-next-line snakecase/snakecase
             postLocationUrl:
-                'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
+              sp_protocol + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
             // eslint-disable-next-line snakecase/snakecase
             redirectLocationUrl:
-                'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login'
+              sp_protocol + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login'
         };
         next();
     } else {

@@ -150,7 +150,7 @@ config.site = {
 // Config eIDAS Authentication (take precedence over Spid)
 config.eidas = {
   enabled: false,
-  gateway_host: 'localhost',
+  gateway_host: 'http://localhost',
   node_host: 'https://se-eidas.redsara.es/EidasNode/ServiceProvider',
   metadata_expiration: 60 * 60 * 24 * 365, // One year
 };
@@ -158,7 +158,7 @@ config.eidas = {
 // Config Spid Configuration
 config.spid = {
     enabled: false,
-    gateway_host: 'localhost:3000',
+    gateway_host: 'http://localhost:3000',
     node_host: 'https://idptest.spid.gov.it',
     metadata_expiration: 60 * 60 * 24 * 365, // One year
 };

@@ -20,18 +20,17 @@ const spid_controller = require('./spid');
 // Create identity provider (if eidas is enables, takes precedence, otherwise SPID is configured)
 let idp_options;
 
-
 if (saml_authentication === 'spid')
     idp_options = {
         sso_login_url: config.spid.node_host, // config.eidas.idp_host should be deprectated
-        sso_logout_url: 'https://' + config.spid.gateway_host + '/saml2/logout',
+        sso_logout_url: config.spid.gateway_host + '/saml2/logout',
         certificates: [],
         nameid_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
     };
 else
     idp_options = {
         sso_login_url: config.eidas.node_host || config.eidas.idp_host, // config.eidas.idp_host should be deprectated
-        sso_logout_url: 'https://' + config.eidas.gateway_host + '/saml2/logout',
+        sso_logout_url: config.eidas.gateway_host + '/saml2/logout',
         certificates: []
     };
 
@@ -508,13 +507,12 @@ exports.search_spid_credentials = function (req, res, next) {
 
                 // Create service provider
                 const sp_options = {
-                    entity_id:
-                        'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/metadata',
+                    entity_id: config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/metadata',
                     private_key: fs.readFileSync('certs/applications/' + req.application.id + '-key.pem').toString(),
                     certificate: fs.readFileSync('certs/applications/' + req.application.id + '-cert.pem').toString(),
                     assert_endpoint:
-                        'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
-                    audience: 'https://' + config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
+                    config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
+                    audience: config.spid.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
                     sign_get_request: true,
                     nameid_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
                     provider_name: credentials.organization_nif,
@@ -588,13 +586,11 @@ exports.search_eidas_credentials = function (req, res, next) {
 
                 // Create service provider
                 const sp_options = {
-                    entity_id:
-                        'https://' + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/metadata',
+                    entity_id: config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/metadata',
                     private_key: fs.readFileSync('certs/applications/' + req.application.id + '-key.pem').toString(),
                     certificate: fs.readFileSync('certs/applications/' + req.application.id + '-cert.pem').toString(),
-                    assert_endpoint:
-                        'https://' + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
-                    audience: 'https://' + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
+                    assert_endpoint: config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
+                    audience: config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
                     sign_get_request: true,
                     nameid_format: 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
                     provider_name: credentials.organization_nif,
@@ -699,14 +695,15 @@ function create_eidas_auth_request(req, res, next) {
         sp_states[auth_request.id] = get_state(req.url);
         sp_redirect_uris[auth_request.id] = get_redirect_uri(req.url);
 
+        const sp_protocol = (config.host.startsWith('https')? 'https://': 'http://');
         req.saml_auth_request = {
             xml: auth_request.request,
             // eslint-disable-next-line snakecase/snakecase
             postLocationUrl:
-                'https://' + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
+              sp_protocol + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login',
             // eslint-disable-next-line snakecase/snakecase
             redirectLocationUrl:
-                'https://' + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login'
+              sp_protocol + config.eidas.gateway_host + '/idm/applications/' + req.application.id + '/saml2/login'
         };
         next();
     } else {

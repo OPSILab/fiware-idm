@@ -26,7 +26,7 @@ services:
       - IDM_DB_SEED=true
       - IDM_EMAIL_HOST=localhost
       - IDM_EMAIL_PORT=25
-      - IDM_EMAIL_ADDRESS="noreply@localhost
+      - IDM_EMAIL_ADDRESS=noreply@localhost
       # Development use only 
       # Use Docker Secrets for Sensitive Data
       - IDM_DB_PASS=secret 
@@ -36,7 +36,7 @@ services:
       - IDM_ADMIN_PASS=1234
       # If sending eMails point to any STMP server
       - IDM_SPID_ENABLED=false
-      - IDM_SPID_GATEWAY_HOST=localhost:3000
+      - IDM_SPID_GATEWAY_HOST=http://localhost:3000
       - IDM_SPID_NODE_HOST=https://idptest.spid.gov.it
 
     volumes:
